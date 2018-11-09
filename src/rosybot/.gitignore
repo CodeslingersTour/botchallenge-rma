@@ -76,3 +76,6 @@ typings/
 .fusebox/
 
 .vscode
+*.dispatch
+Summary.html
+data

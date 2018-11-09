@@ -12,7 +12,7 @@ const { BotFrameworkAdapter, MemoryStorage, ConversationState, UserState } = req
 // Import required bot configuration.
 const { BotConfiguration } = require('botframework-config');
 
-const { RmaBot } = require('./bot');
+const { RosyBot } = require('./rosy-bot');
 
 // Read botFilePath and botFileSecret from .env file
 // Note: Ensure you have a .env file and include botFilePath and botFileSecret.
@@ -24,14 +24,14 @@ require('dotenv').config({ path: ENV_FILE });
 const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
 let botConfig;
 try {
-    // Read bot configuration from .bot file.
-    botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
+	// Read bot configuration from .bot file.
+	botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
 } catch (err) {
-    console.error(`\nError reading bot file. Please ensure you have valid botFilePath and botFileSecret set for your environment.`);
-    console.error(`\n - The botFileSecret is available under appsettings for your Azure Bot Service bot.`);
-    console.error(`\n - If you are running this bot locally, consider adding a .env file with botFilePath and botFileSecret.`);
-    console.error(`\n - See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration.\n\n`);
-    process.exit();
+	console.error(`\nError reading bot file. Please ensure you have valid botFilePath and botFileSecret set for your environment.`);
+	console.error(`\n - The botFileSecret is available under appsettings for your Azure Bot Service bot.`);
+	console.error(`\n - If you are running this bot locally, consider adding a .env file with botFilePath and botFileSecret.`);
+	console.error(`\n - See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration.\n\n`);
+	process.exit();
 }
 
 // For local development configuration as defined in .bot file
@@ -46,24 +46,24 @@ const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about .bot file its use and bot configuration .
 const adapter = new BotFrameworkAdapter({
-    appId: endpointConfig.appId || process.env.microsoftAppID,
-    appPassword: endpointConfig.appPassword || process.env.microsoftAppPassword
+	appId: endpointConfig.appId || process.env.microsoftAppID,
+	appPassword: endpointConfig.appPassword || process.env.microsoftAppPassword
 });
 
 // Catch-all for errors.
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
-    console.error(`\n [onTurnError]: ${ error }`);
-    // Send a message to the user
-    await context.sendActivity(`Oops. Something went wrong!`);
-    // Load conversation state.
-    await conversationState.load(context);
-    // Clear out state.
-    await conversationState.clear(context);
-    // Save state changes.
-    await conversationState.saveChanges(context);
+	// This check writes out errors to console log
+	// NOTE: In production environment, you should consider logging this to Azure
+	//       application insights.
+	console.error(`\n [onTurnError]: ${ error }`);
+	// Send a message to the user
+	await context.sendActivity(`Oops. Something went wrong!`);
+	// Load conversation state.
+	await conversationState.load(context);
+	// Clear out state.
+	await conversationState.clear(context);
+	// Save state changes.
+	await conversationState.saveChanges(context);
 };
 
 // Define a state store for your bot. See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
@@ -94,25 +94,25 @@ userState = new UserState(memoryStorage);
 // Create the main dialog.
 let bot;
 try {
-    bot = new RmaBot(conversationState, userState, botConfig);
+	bot = new RosyBot(conversationState, userState, botConfig);
 } catch (err) {
-    console.error(`[botInitializationError]: ${ err }`);
-    process.exit();
+	console.error(`[botInitializationError]: ${ err }`);
+	process.exit();
 }
 
 // Create HTTP server
 let server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function() {
-    console.log(`\n${ server.name } listening to ${ server.url }`);
-    console.log(`\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator`);
-    console.log(`\nTo talk to your bot, open nlp-with-dispatch.bot file in the Emulator`);
+	console.log(`\n${ server.name } listening to ${ server.url }`);
+	console.log(`\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator`);
+	console.log(`\nTo talk to your bot, open nlp-with-dispatch.bot file in the Emulator`);
 });
 
 // Listen for incoming activities and route them to your bot main dialog.
 server.post('/api/messages', (req, res) => {
-    // Route received a request to adapter for processing
-    adapter.processActivity(req, res, async (turnContext) => {
-        // route to bot activity handler.
-        await bot.onTurn(turnContext);
-    });
+	// Route received a request to adapter for processing
+	adapter.processActivity(req, res, async (turnContext) => {
+		// route to bot activity handler.
+		await bot.onTurn(turnContext);
+	});
 });
