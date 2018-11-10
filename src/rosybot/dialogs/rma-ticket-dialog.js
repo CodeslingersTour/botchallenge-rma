@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+var dateFormat = require('dateformat');
 const { LuisRecognizer } = require('botbuilder-ai');
 const { RmaTicket } = require('../state/rma-ticket');
 const { RmaTicketState } = require('../state/rma-ticket-state');
@@ -93,26 +94,28 @@ class RmaTicketDialog {
 	 */
 	async handleLookupRmaTicket(luisResults, context) {
 
-		const entities = findEntities(TICKETID_ENTITY, luisResults.entities);
-		let ticketId = null;
+		// const entities = findEntities(TICKETID_ENTITY, luisResults.entities);
+		// let ticketId = null;
 
-		if(entities.length > 0)
-			ticketId = entities[0];
+		// if(entities.length > 0)
+		// 	ticketId = entities[0];
 
-		if(!ticketId){
-			await context.sendActivity(`Please specify a ticket ID`);
-			return;
-		}
+		// if(!ticketId){
+		// 	await context.sendActivity(`Please specify a ticket ID`);
+		// 	return;
+		// }
 
-		var ticket = await this.state.getRmaTicket(ticketId, context);
+		var ticket = await this.state.getRmaTicket(context);
 
 		if(!ticket) {
-			await context.sendActivity(`I couldn't find an RMA ticket with the ID ${ticketId}`);
+			// await context.sendActivity(`I couldn't find an RMA ticket with the ID ${ticketId}`);
+			await context.sendActivity(`You don't have any open RMA tickets`);
 		}
 		else {
 			await context.sendActivity(`Here is the status of your RMA ticket:`);
 
-			var desc = `Product: ${ticket.productName}\nDate requestd: ${ticket.dateRequested.toString()}\nStatus: ${ticket.status}`;
+			let date = new Date(ticket.dateRequested);
+			let desc = `Product: ${ticket.productName}\nDate requested: ${dateFormat(date)}\nStatus: ${ticket.status}`;
 			await context.sendActivity(desc);
 		}
 	}

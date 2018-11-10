@@ -1,48 +1,57 @@
 {
-	"name": "RosyBot",
-	"description": "",
-	"services": [
-		{
-			"type": "endpoint",
-			"appId": "f286ceb4-31d7-44dd-b71b-061be064f947",
-			"appPassword": "tu1KTeGCDyh2Fq9kMQp13g==!enfywrpZwysdp5I7uH2d2ViAR7+yAPTl1xL9hqZ3HJc=",
-			"endpoint": "http://localhost:3978/api/messages",
-			"id": "127",
-			"name": "development"
-		},
-		{
-			"type": "qna",
-			"endpointKey": "ztdT3MBF/nTzIOlU1ItbfQ==!upaD3hY9yI0N2nV6prLbmbj5wzVMflQbhtkTyaherK2BAyByeE4yboFSxVqviaZU",
-			"hostname": "https://rosybotqnamaker.azurewebsites.net/qnamaker",
-			"id": "69f6adeb-86f3-4711-9513-7d71abcf4970",
-			"kbId": "69f6adeb-86f3-4711-9513-7d71abcf4970",
-			"name": "RosyBot RMA FAQ",
-			"subscriptionKey": "jT2cmTxCSBe8ftq47u+eHA==!zRu05W+WBlc8Q/qGf9bCUcsKFYHtNsBA/9a3DNc1+BS8d2YBwuMve7B1c19kPecW"
-		},
-		{
-			"type": "luis",
-			"appId": "a00d649d-7d42-4a54-9e6e-4e69eca5e504",
-			"authoringKey": "Ujv1oMLI/9+UOcd8WcJoVA==!RPWam8MLgf26gJDJ/ZyrwyVjBZpEUn6Sg9YGamMaWL5FY2CE58OITZfbjz0cuODy",
-			"id": "a00d649d-7d42-4a54-9e6e-4e69eca5e504",
-			"name": "RosyBot-RMA",
-			"region": "westus",
-			"subscriptionKey": "GpIQPswELw2n6A3l52eFYw==!dhy2kYOafxGwrD3oPwqj0+8aPtWq6qekE/pnKMyKQ3jPhKtr4GU37TqV0G8xOHf9",
-			"version": "0.1"
-		},
-		{
-			"type": "dispatch",
-			"appId": "b64ae4e9-0264-4522-81b5-2f619fb08d72",
-			"authoringKey": "BY2c+jQwP9pcfBoqKaLIDw==!L28ehcDZWPtgS+708/4/7FLbhxwhM5FHSBYpP53A1Fpa6/UyN0W2vqpb3pcH5Hqt",
-			"id": "b64ae4e9-0264-4522-81b5-2f619fb08d72",
-			"name": "RosyBotDispatch",
-			"region": "westus",
-			"subscriptionKey": "Cd6M72cqCEDuD3m1qRSDUA==!bX+/4I/MlJgNBzQYyRq6vrc7ydXNtmFDoOw/yE9WrFcRTZ/7U2Wd6BRBmfvSjOl6",
-			"version": "Dispatch",
-			"serviceIds": []
-		}
-	],
-	"padlock": "NHkvIbTk0N+92NBXxSHlpw==!mvtOAt5qJblQt9AkhG04RDu7rtTo4wPhGonfpO2+OsinFXJ83AB6viEv+hy/usCU",
-	"version": "2.0",
-	"path": "/Volumes/Data/Projects/botchallenge-rma/src/bot/RosyBot.bot",
-	"overrides": null
+    "name": "RosyBot",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "f286ceb4-31d7-44dd-b71b-061be064f947",
+            "appPassword": "gOMxfbv2V+OGh+0eE0xCfA==!Lcskv+CLvzqTssuuXcUsGvZF3PEgW83ZsEKC+Ya445M=",
+            "endpoint": "http://localhost:3978/api/messages",
+            "id": "127",
+            "name": "development"
+        },
+        {
+            "type": "qna",
+            "endpointKey": "0JXAl8e0c2Wc1utDAfYwXw==!DLO+0hDlsWb7/+ya2v2sx/I13KourE7c788DvDKH9BihPL0fL7t0+WPJYRcyvpN6",
+            "hostname": "https://rosybotqnamaker.azurewebsites.net/qnamaker",
+            "id": "69f6adeb-86f3-4711-9513-7d71abcf4970",
+            "kbId": "69f6adeb-86f3-4711-9513-7d71abcf4970",
+            "name": "RosyBot RMA FAQ",
+            "subscriptionKey": "uxTgKL1hT5kDahR0Uwkq7g==!T/fzDpH+WDiWs+9JBKCxYphWljy8D/Ws74uA48Oy3D3r9GLTC9OYdfm2JsXy4gul"
+        },
+        {
+            "type": "luis",
+            "appId": "a00d649d-7d42-4a54-9e6e-4e69eca5e504",
+            "authoringKey": "MfGhbXzO4T6C3Vj/p/XfCg==!IYOVLVPypBdG+xWQ3p4by8vAh7ro27lWPIPo1Qpwy/pu7qrS4seJVaA6N+yiuR/H",
+            "id": "a00d649d-7d42-4a54-9e6e-4e69eca5e504",
+            "name": "RosyBot-RMA",
+            "region": "westus",
+            "subscriptionKey": "pSdJk4HuIpEB+8SETDxr3A==!1QbmsIOuAXPkLUiHHD+wf/HK832m/UK74bjlWkbz/O4Bqj6vdFkDq7+p6n8nQD+y",
+            "version": "0.1"
+        },
+        {
+            "type": "dispatch",
+            "appId": "b64ae4e9-0264-4522-81b5-2f619fb08d72",
+            "authoringKey": "yyuaaP9G/TxqOBG2v+kezQ==!wPPESMiGnVJel0+UTCm74GV3YOjb37b1WXoVa0Rp4UqYosa5FF9po3UF+1MpK3Y/",
+            "id": "b64ae4e9-0264-4522-81b5-2f619fb08d72",
+            "name": "RosyBotDispatch",
+            "region": "westus",
+            "serviceIds": [],
+            "subscriptionKey": "99vxR+HlbUVajcIJ6w2skA==!fBlm5yPMk+gX9qkpclEOvFZTxrJZH5oxQo6Znr6OHmgtzQKQ5JUBQMkEmtxvlTo4",
+            "version": "Dispatch"
+        },
+        {
+            "type": "qna",
+            "endpointKey": "vAFjzcutopw7hhoJpO3LaQ==!1fnhA8hx6doOpfe9oroX5dUwiGH4XdgNYo+onnxd/JLBaRvp5sTppvUYamsJ3WA1",
+            "hostname": "https://rosybotchitchatqnamaker.azurewebsites.net/qnamaker",
+            "id": "6bc77753-f4e4-4dc2-b11b-9d1c94540c44",
+            "kbId": "6bc77753-f4e4-4dc2-b11b-9d1c94540c44",
+            "subscriptionKey": "JG+IthN0gptiXUBjflZOPA==!V4jUE3zW8tnOoDQrn18irn04FnpS0ajRhmMw4u/O4Js9i3pfGPfStWKq40Ms6efl",
+            "name": "RosyBot Chit Chat"
+        }
+    ],
+    "padlock": "2hnLQSpqubMpMoLmDHfKow==!TJgXCiShBNQpednmgtVpiyLRnCT0r+vGUEQorKOP6CHeVM7N+cVpkPpisYmVxUJA",
+    "version": "2.0",
+    "overrides": null,
+    "path": "/Volumes/Data/Projects/botchallenge-rma/src/rosybot/RosyBot.bot"
 }

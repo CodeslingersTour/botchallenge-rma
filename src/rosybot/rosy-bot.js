@@ -9,7 +9,11 @@ const { RmaQnADialog } = require('./dialogs/rma-qna-dialog');
 const RMA_TICKET_INTENT = 'l_RosyBot-RMA';
 const NONE_INTENT = 'None';
 const RMA_QNA_INTENT = 'q_RosyBot_RMA_FAQ';
+const RMA_CHITCHAT_INTENT = 'q_RosyBot_Chit_Chat';
 const DISPATCH_CONFIG = 'RosyBotDispatch';
+
+const RMA_QNA_CONFIG = 'RosyBot RMA FAQ';
+const CHITCHAT_CONFIG = 'RosyBot Chit Chat';
 
 const GUIDANCE_MESSAGE = `You can ask me FAQs or tell me to 'create an RMA ticket for a laptop' or 'Lookup RMA ticket 895784625'`;
 const GREETING_MESSAGE = `Hi, I'm Rosy the bot!`;
@@ -28,7 +32,8 @@ class RosyBot {
 		if (!botConfig) throw new Error(`Missing parameter. Bot configuration parameter is missing`);
 
 		this.rmaTicketDialog = new RmaTicketDialog(conversationState, userState, botConfig);
-		this.rmaQnaDialog = new RmaQnADialog(botConfig);
+		this.rmaQnaDialog = new RmaQnADialog(botConfig, RMA_QNA_CONFIG);
+		this.chitChatDialog = new RmaQnADialog(botConfig, CHITCHAT_CONFIG);
 
 		this.conversationState = conversationState;
 		this.userState = userState;
@@ -58,18 +63,21 @@ class RosyBot {
 			const dispatchResults = await this.dispatchRecognizer.recognize(turnContext);
 			const dispatchTopIntent = LuisRecognizer.topIntent(dispatchResults);
 			switch (dispatchTopIntent) {
-			case RMA_TICKET_INTENT:
-				await this.rmaTicketDialog.onTurn(turnContext);
-				break;
-			case RMA_QNA_INTENT:
-				await this.rmaQnaDialog.onTurn(turnContext);
-				break;
-			case NONE_INTENT:
-			default:
-				// Unknown request
-				await turnContext.sendActivity(CONFUSED_MESSAGE);
-				await turnContext.sendActivity(GUIDANCE_MESSAGE);
-			}
+				case RMA_TICKET_INTENT:
+					await this.rmaTicketDialog.onTurn(turnContext);
+					break;
+				case RMA_QNA_INTENT:
+					await this.rmaQnaDialog.onTurn(turnContext);
+					break;
+				case RMA_CHITCHAT_INTENT:
+					await this.chitChatDialog.onTurn(turnContext);
+					break;
+				case NONE_INTENT:
+				default:
+					// Unknown request
+					await turnContext.sendActivity(CONFUSED_MESSAGE);
+					await turnContext.sendActivity(GUIDANCE_MESSAGE);
+				}
 
 			// save state changes
 			await this.conversationState.saveChanges(turnContext);
