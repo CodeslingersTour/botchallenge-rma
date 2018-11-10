@@ -58,26 +58,31 @@ class RosyBot {
 	 */
 	async onTurn(turnContext) {
 		if (turnContext.activity.type === ActivityTypes.Message) {
-			// determine which dialog should fulfill this request
-			// call the dispatch LUIS model to get results.
-			const dispatchResults = await this.dispatchRecognizer.recognize(turnContext);
-			const dispatchTopIntent = LuisRecognizer.topIntent(dispatchResults);
-			switch (dispatchTopIntent) {
-				case RMA_TICKET_INTENT:
-					await this.rmaTicketDialog.onTurn(turnContext);
-					break;
-				case RMA_QNA_INTENT:
-					await this.rmaQnaDialog.onTurn(turnContext);
-					break;
-				case RMA_CHITCHAT_INTENT:
-					await this.chitChatDialog.onTurn(turnContext);
-					break;
-				case NONE_INTENT:
-				default:
-					// Unknown request
-					await turnContext.sendActivity(CONFUSED_MESSAGE);
-					await turnContext.sendActivity(GUIDANCE_MESSAGE);
+
+			if (this.rmaTicketDialog.isInWaterfall) {
+				await this.rmaTicketDialog.onTurn(turnContext);
+			} else {
+				// determine which dialog should fulfill this request
+				// call the dispatch LUIS model to get results.
+				const dispatchResults = await this.dispatchRecognizer.recognize(turnContext);
+				const dispatchTopIntent = LuisRecognizer.topIntent(dispatchResults);
+				switch (dispatchTopIntent) {
+					case RMA_TICKET_INTENT:
+						await this.rmaTicketDialog.onTurn(turnContext);
+						break;
+					case RMA_QNA_INTENT:
+						await this.rmaQnaDialog.onTurn(turnContext);
+						break;
+					case RMA_CHITCHAT_INTENT:
+						await this.chitChatDialog.onTurn(turnContext);
+						break;
+					case NONE_INTENT:
+					default:
+						// Unknown request
+						await turnContext.sendActivity(CONFUSED_MESSAGE);
+						await turnContext.sendActivity(GUIDANCE_MESSAGE);
 				}
+			}
 
 			// save state changes
 			await this.conversationState.saveChanges(turnContext);
