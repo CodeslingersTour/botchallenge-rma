@@ -32,7 +32,7 @@ class QnaDialog {
 		// Call QnA Maker and get results.
 		const qnaResult = await this.qnaRecognizer.generateAnswer(turnContext.activity.text, QNA_TOP_N, QNA_CONFIDENCE_THRESHOLD);
 		if (!qnaResult || qnaResult.length === 0 || !qnaResult[0].answer) {
-			await turnContext.sendActivity(`No answer found in QnA Maker KB.`);
+			await turnContext.sendActivity(`I searched all my knowledge bases and came up empty.`);
 			return;
 		}
 		// respond with qna result
