@@ -3,7 +3,7 @@
 const { LuisRecognizer } = require('botbuilder-ai');
 const { ActivityTypes } = require('botbuilder');
 const { RmaTicketDialog } = require('./dialogs/rma-ticket-dialog');
-const { RmaQnADialog } = require('./dialogs/rma-qna-dialog');
+const { QnaDialog } = require('./dialogs/qna-dialog');
 
 // this is the LUIS service type entry in the .bot file.
 const RMA_TICKET_INTENT = 'l_RosyBot-RMA';
@@ -32,8 +32,8 @@ class RosyBot {
 		if (!botConfig) throw new Error(`Missing parameter. Bot configuration parameter is missing`);
 
 		this.rmaTicketDialog = new RmaTicketDialog(conversationState, userState, botConfig);
-		this.rmaQnaDialog = new RmaQnADialog(botConfig, RMA_QNA_CONFIG);
-		this.chitChatDialog = new RmaQnADialog(botConfig, CHITCHAT_CONFIG);
+		this.rmaQnaDialog = new QnaDialog(botConfig, RMA_QNA_CONFIG);
+		this.chitChatDialog = new QnaDialog(botConfig, CHITCHAT_CONFIG);
 
 		this.conversationState = conversationState;
 		this.userState = userState;

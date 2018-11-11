@@ -165,7 +165,7 @@ class RmaTicketDialog {
 
 	getTicketSummary(ticket) {
 		let date = new Date(ticket.dateRequested);
-		let desc = `Product: ${ticket.productName}\nReason: ${ticket.reason}\nDate requested: ${dateFormat(date)}\nStatus: ${ticket.status}`;
+		let desc = `Product: ${ticket.productName}\nReason: ${ticket.reason}\nDate requested: ${dateFormat(date)}\nStatus: ${ticket.status}\nTicket ID: ${ticket.ticketId}`;
 		return desc;
 	}
 

@@ -6,7 +6,7 @@ const QNA_TOP_N = 1;
 const QNA_CONFIDENCE_THRESHOLD = 0.5;
 
 
-class RmaQnADialog {
+class QnaDialog {
 	/**
 	 *
 	 * @param {Object} botConfig bot configuration from .bot file
@@ -40,4 +40,4 @@ class RmaQnADialog {
 	}
 };
 
-module.exports.RmaQnADialog = RmaQnADialog;
+module.exports.QnaDialog = QnaDialog;
