@@ -16,4 +16,13 @@ steps:
     cd src/rosybot
     npm install
     npm run start
-  displayName: 'npm install and build'
+
+  - task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)/src/rosybot'
+    #archiveType: 'zip' # Options: zip, 7z, tar, wim
+    #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    #replaceExistingArchive: true 
+
+  displayName: 'npm install and archive'
