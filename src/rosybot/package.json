@@ -1,12 +1,13 @@
 {
-  "name": "Rosy Bot",
+  "name": "rosy-bot",
   "version": "1.0.0",
   "description": "Bot Builder v4 example that demonstrates how dispatch should be used E2E.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./index.js",
-    "watch": "nodemon ./index.js"
+    "watch": "nodemon ./index.js",
+    "debug": "nodemon --inspect ./index.js"
   },
   "author": "Microsoft",
   "license": "MIT",
