@@ -25,4 +25,9 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     #replaceExistingArchive: true 
 
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+
   displayName: 'npm install and archive'
