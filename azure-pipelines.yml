@@ -25,4 +25,4 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
     #replaceExistingArchive: true 
 
-displayName: 'npm install and archive'
+  displayName: 'npm install and archive'
