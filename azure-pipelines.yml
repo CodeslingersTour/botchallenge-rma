@@ -19,10 +19,10 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'src/rosybot/'
+    rootFolderOrFile: 'src/rosybot/*'
     #archiveType: 'zip' # Options: zip, 7z, tar, wim
     #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip' 
     #replaceExistingArchive: true 
 
   displayName: 'npm install and archive'
