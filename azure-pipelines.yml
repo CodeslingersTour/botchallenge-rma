@@ -15,5 +15,5 @@ steps:
 - script: |
     cd src/rosybot
     npm install
-    npm run build
+    npm run start
   displayName: 'npm install and build'
