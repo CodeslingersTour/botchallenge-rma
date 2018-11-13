@@ -57,7 +57,7 @@ adapter.onTurnError = async (context, error) => {
 	//       application insights.
 	console.error(`\n [onTurnError]: ${ error }`);
 	// Send a message to the user
-	await context.sendActivity(`Oops. Something went wrong!`);
+	await context.sendActivity(`Oops. Something went wrong!\n${error}`);
 	// Load conversation state.
 	await conversationState.load(context);
 	// Clear out state.
@@ -104,8 +104,6 @@ try {
 let server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function() {
 	console.log(`\n${ server.name } listening to ${ server.url }`);
-	console.log(`\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator`);
-	console.log(`\nTo talk to your bot, open nlp-with-dispatch.bot file in the Emulator`);
 });
 
 // Listen for incoming activities and route them to your bot main dialog.

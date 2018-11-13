@@ -2,23 +2,21 @@
 // Licensed under the MIT License.
 const { QnAMaker } = require('botbuilder-ai');
 
-// Name of the QnA Maker service in the .bot file.
-const QNA_CONFIGURATION = 'RosyBot RMA FAQ';
-// CONSTS used in QnA Maker query. See [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-qna?view=azure-bot-service-4.0&tabs=cs) for additional info
 const QNA_TOP_N = 1;
 const QNA_CONFIDENCE_THRESHOLD = 0.5;
 
 
-class RmaQnADialog {
+class QnaDialog {
 	/**
 	 *
 	 * @param {Object} botConfig bot configuration from .bot file
 	 */
-	constructor(botConfig) {
+	constructor(botConfig, kbConfigName) {
 		if (!botConfig) throw new Error('Need bot config');
+		if (!kbConfigName) throw new Error('Need kb config name in .bot file');
 
 		// add recognizers
-		const qnaConfig = botConfig.findServiceByNameOrId(QNA_CONFIGURATION);
+		const qnaConfig = botConfig.findServiceByNameOrId(kbConfigName);
 		if (!qnaConfig || !qnaConfig.kbId) throw new Error(`QnA Maker application information not found in .bot file. Please ensure you have all required QnA Maker applications created and available in the .bot file. See readme.md for additional information\n`);
 		this.qnaRecognizer = new QnAMaker({
 			knowledgeBaseId: qnaConfig.kbId,
@@ -34,7 +32,7 @@ class RmaQnADialog {
 		// Call QnA Maker and get results.
 		const qnaResult = await this.qnaRecognizer.generateAnswer(turnContext.activity.text, QNA_TOP_N, QNA_CONFIDENCE_THRESHOLD);
 		if (!qnaResult || qnaResult.length === 0 || !qnaResult[0].answer) {
-			await turnContext.sendActivity(`No answer found in QnA Maker KB.`);
+			await turnContext.sendActivity(`I searched all my knowledge bases and came up empty.`);
 			return;
 		}
 		// respond with qna result
@@ -42,4 +40,4 @@ class RmaQnADialog {
 	}
 };
 
-module.exports.RmaQnADialog = RmaQnADialog;
+module.exports.QnaDialog = QnaDialog;

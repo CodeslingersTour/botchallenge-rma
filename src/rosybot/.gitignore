@@ -79,3 +79,6 @@ typings/
 *.dispatch
 Summary.html
 data
+
+package-lock.json
+RosyBotDispatch.json
