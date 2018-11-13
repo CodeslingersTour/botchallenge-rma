@@ -4,6 +4,9 @@ const { LuisRecognizer } = require('botbuilder-ai');
 const { ActivityTypes } = require('botbuilder');
 const { RmaTicketDialog } = require('./dialogs/rma-ticket-dialog');
 const { QnaDialog } = require('./dialogs/qna-dialog');
+let appInsights = require('applicationinsights');
+appInsights.setup('072a7980-936a-4fb9-8dc0-5b0f7abe3b15').start();
+const telemetryClient = appInsights.defaultClient;
 
 // this is the LUIS service type entry in the .bot file.
 const RMA_TICKET_INTENT = 'l_RosyBot-RMA';
@@ -18,6 +21,10 @@ const CHITCHAT_CONFIG = 'RosyBot Chit Chat';
 const GUIDANCE_MESSAGE = `You can ask me FAQs or tell me to 'create an RMA ticket for a laptop' or 'Lookup RMA ticket 895784625'`;
 const GREETING_MESSAGE = `Hi, I'm Rosy the bot!`;
 const CONFUSED_MESSAGE = `I don't understand. Can you please rephrase?`;
+
+//appInsights Service Name
+
+const APP_INSIGHTS_SERVICE_NAME = `appInsights`;
 
 class RosyBot {
 	/**
@@ -47,6 +54,10 @@ class RosyBot {
 			// CAUTION: Its better to assign and use a subscription key instead of authoring key here.
 			endpointKey: dispatchConfig.authoringKey
 		});
+		
+		
+		
+
 	}
 
 	/**
@@ -68,17 +79,21 @@ class RosyBot {
 				const dispatchTopIntent = LuisRecognizer.topIntent(dispatchResults);
 				switch (dispatchTopIntent) {
 					case RMA_TICKET_INTENT:
+						telemetryClient.trackEvent({name: "ROSYBOT_RMA_TICKET_INTENT"});
 						await this.rmaTicketDialog.onTurn(turnContext);
 						break;
 					case RMA_QNA_INTENT:
+						telemetryClient.trackEvent({name: "ROSYBOT_RMA_QNA_INTENT"});
 						await this.rmaQnaDialog.onTurn(turnContext);
 						break;
 					case RMA_CHITCHAT_INTENT:
+						telemetryClient.trackEvent({name: "ROSYBOT_RMA_CHITCHAT_INTENT"});
 						await this.chitChatDialog.onTurn(turnContext);
 						break;
 					case NONE_INTENT:
 					default:
 						// Unknown request
+						telemetryClient.trackEvent({name: "ROSYBOT_UNKNOWN_INTENT"});
 						await turnContext.sendActivity(CONFUSED_MESSAGE);
 						await turnContext.sendActivity(GUIDANCE_MESSAGE);
 				}
