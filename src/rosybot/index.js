@@ -6,6 +6,7 @@
 // Import required packages
 const path = require('path');
 const restify = require('restify');
+const request = require('request');
 
 // Import required bot services. See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter, MemoryStorage, ConversationState, UserState } = require('botbuilder');
@@ -106,11 +107,41 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 	console.log(`\n${ server.name } listening to ${ server.url }`);
 });
 
+server.get('/', restify.plugins.serveStatic({
+
+	directory: __dirname,
+
+	default: 'index.html'
+
+  }));
+
 // Listen for incoming activities and route them to your bot main dialog.
 server.post('/api/messages', (req, res) => {
 	// Route received a request to adapter for processing
 	adapter.processActivity(req, res, async (turnContext) => {
 		// route to bot activity handler.
 		await bot.onTurn(turnContext);
+	});
+});
+
+// Listen for config requests to return a DirectLine Token for the WebChat
+server.get('/config', (req, res) => {
+	const options = {
+        method: 'POST',
+        uri: 'https://directline.botframework.com/v3/directline/tokens/generate',
+        headers: {
+            'Authorization': 'Bearer ' + process.env.directLineSecret
+		},
+		json: true
+    };
+    request.post(options, (error, response, body) => {
+        if (!error && response.statusCode < 300) {
+            res.json({ 
+                    token: response.body.token,
+                });
+        }
+        else {
+            res.status(500).send('Call to retrieve token from DirectLine failed');
+        } 
 	});
 });
