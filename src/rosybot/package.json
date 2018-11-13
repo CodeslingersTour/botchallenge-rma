@@ -1,5 +1,5 @@
 {
-  "name": "Rosy Bot",
+  "name": "rosy-bot",
   "version": "1.0.0",
   "description": "Bot Builder v4 example that demonstrates how dispatch should be used E2E.",
   "main": "index.js",
