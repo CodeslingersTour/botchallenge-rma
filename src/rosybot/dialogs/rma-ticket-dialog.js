@@ -137,6 +137,7 @@ class RmaTicketDialog {
 		await this.ticketState.set(step.context, ticket);
 
 		await step.context.sendActivity(`Ok, I've created an RMA ticket for the ${ticket.productName}. Here are the details:`)
+		// adaptive card here
 		await step.context.sendActivity(this.getTicketSummary(ticket));
 		await step.context.sendActivity(`Remember, you can always ask me the status of the ticket anytime.`);
 
@@ -159,6 +160,7 @@ class RmaTicketDialog {
 		}
 		else {
 			await context.sendActivity(`Here is the status of your RMA ticket:`);
+			// adaptive card here
 			await context.sendActivity(this.getTicketSummary(ticket));
 		}
 	}
