@@ -1,0 +1,217 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "id": "subjectTitle",
+          "size": "large",
+          "weight": "bolder",
+          "text": "RMA Created"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "lblTicketId",
+                  "weight": "Bolder",
+                  "text": "Ticket ID:"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "id": "txtTicketId",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "txtTicketId",
+                  "text": "NTL38030"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "width": "stretch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "lblProductType",
+                  "weight": "Bolder",
+                  "text": "Product Type:"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "txtProductType",
+                  "text": "Tablet"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "width": "stretch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "spacing": "Small",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "lblReason",
+                  "spacing": "Small",
+                  "weight": "Bolder",
+                  "text": "Reason"
+                }
+              ],
+              "width": {
+                "physicalSize": 100,
+                "unit": 1
+              }
+            },
+            {
+              "type": "Column",
+              "id": "txtTicketId",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "txtReason",
+                  "text": "It is broken, I submerged in water",
+                  "wrap": true
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "width": "stretch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "spacing": "Small",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "lblCreated",
+                  "weight": "Bolder",
+                  "text": "Date Created"
+                }
+              ],
+              "width": {
+                "physicalSize": 100,
+                "unit": 1
+              }
+            },
+            {
+              "type": "Column",
+              "id": "txtTicketId",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "id": "txtCreatedDate",
+                  "text": "11/12/2018 12:15 PM CST"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "width": "stretch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ShowCard",
+              "title": "Send to your email",
+              "card": {
+                "type": "AdaptiveCard",
+                "body": [
+                  {
+                    "type": "Input.Text",
+                    "isMultiline": false,
+                    "id": "textinputid"
+                  },
+                  {
+                    "type": "ActionSet",
+                    "spacing": "small",
+                    "actions": [
+                      {
+                        "type": "Action.Http",
+                        "method": "POST",
+                        "body": "{}",
+                        "title": "OK",
+                        "url": "https://someurl.com/"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}

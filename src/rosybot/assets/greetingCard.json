@@ -1,0 +1,61 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "horizontalAlignment": "Center",
+                                    "url": "https://vignette.wikia.nocookie.net/thejetsons/images/2/2e/Rosie.png/revision/latest?cb=20151108005805",
+                                    "size": "Large"
+                                }
+                            ],
+                            "width": "stretch"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container"
+        },
+        {
+            "type": "TextBlock",
+            "size": "Large",
+            "color": "Accent",
+            "text": "Hello, I'm Rosie the Bot!"
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "size": "Medium",
+            "text": "Things I can help you with"
+        },
+        {
+            "type": "TextBlock",
+            "horizontalAlignment": "Left",
+            "separator": true,
+            "weight": "Lighter",
+            "text": "Ask me about FAQs"
+        },
+        {
+            "type": "TextBlock",
+            "weight": "Lighter",
+            "text": "Tell me to 'create an RMA ticket for a laptop'"
+        },
+        {
+            "type": "TextBlock",
+            "weight": "Lighter",
+            "text": "'Lookup RMA ticket 895784625'"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}

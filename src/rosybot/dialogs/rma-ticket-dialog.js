@@ -4,6 +4,8 @@ var dateFormat = require('dateformat');
 const { LuisRecognizer } = require('botbuilder-ai');
 const { ChoicePrompt, DialogSet, NumberPrompt, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { RmaTicket } = require('../state/rma-ticket');
+const { CardFactory } = require('botbuilder');
+const RmaCard = require('../assets/rmaCard.json');
 
 // LUIS intent names. you can get this from the .lu file.
 const CREATE_RMA_TICKET_INTENT = 'CreateRmaTicket';
@@ -135,10 +137,11 @@ class RmaTicketDialog {
 		if (!ticket.reason && step.result) ticket.reason = step.result;
 
 		await this.ticketState.set(step.context, ticket);
+		// let rmaText = RmaCard.toString().replace('{{RMA_NUMBER}}', ticket.ticketId);
 
 		await step.context.sendActivity(`Ok, I've created an RMA ticket for the ${ticket.productName}. Here are the details:`)
 		// adaptive card here
-		await step.context.sendActivity(this.getTicketSummary(ticket));
+		await step.context.sendActivity({attachments: [CardFactory.adaptiveCard(RmaCard)]});
 		await step.context.sendActivity(`Remember, you can always ask me the status of the ticket anytime.`);
 
 		this.isInWaterfall = false;

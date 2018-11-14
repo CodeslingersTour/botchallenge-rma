@@ -2,11 +2,17 @@
 // Licensed under the MIT License.
 const { LuisRecognizer } = require('botbuilder-ai');
 const { ActivityTypes } = require('botbuilder');
+const { CardFactory } = require('botbuilder');
 const { RmaTicketDialog } = require('./dialogs/rma-ticket-dialog');
 const { QnaDialog } = require('./dialogs/qna-dialog');
 let appInsights = require('applicationinsights');
+// let adaptiveCards = require("adaptivecards");
 appInsights.setup('072a7980-936a-4fb9-8dc0-5b0f7abe3b15').start();
 const telemetryClient = appInsights.defaultClient;
+
+
+const GreetingCard = require('./assets/greetingCard.json');
+
 
 // this is the LUIS service type entry in the .bot file.
 const RMA_TICKET_INTENT = 'l_RosyBot-RMA';
@@ -21,10 +27,6 @@ const CHITCHAT_CONFIG = 'RosyBot Chit Chat';
 const GUIDANCE_MESSAGE = `You can ask me FAQs or tell me to 'create an RMA ticket for a laptop' or 'Lookup RMA ticket 895784625'`;
 const GREETING_MESSAGE = `Hi, I'm Rosy the bot!`;
 const CONFUSED_MESSAGE = `I don't understand. Can you please rephrase?`;
-
-//appInsights Service Name
-
-const APP_INSIGHTS_SERVICE_NAME = `appInsights`;
 
 class RosyBot {
 	/**
@@ -120,8 +122,9 @@ class RosyBot {
 						// When activity type is "conversationUpdate" and the member joining the conversation is the bot
 						// we will send our Welcome Adaptive Card.  This will only be sent once, when the Bot joins conversation
 						// To learn more about Adaptive Cards, see https://aka.ms/msbot-adaptivecards for more details.
-						await turnContext.sendActivity(GREETING_MESSAGE);
-						await turnContext.sendActivity(GUIDANCE_MESSAGE);
+						
+						await turnContext.sendActivity({attachments: [CardFactory.adaptiveCard(GreetingCard)]});
+						// await turnContext.sendActivity(GUIDANCE_MESSAGE);
 					}
 				}
 			}
